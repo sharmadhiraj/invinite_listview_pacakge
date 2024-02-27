@@ -1,17 +1,23 @@
+/// A Flutter library for implementing infinite scroll listview widgets.
 library infinite_listview_package;
 
 import 'package:flutter/material.dart';
 
+/// An abstract class for creating infinite scroll listview widgets.
 abstract class InfiniteListView<T> extends StatefulWidget {
   @override
   _InfiniteListViewState createState() => _InfiniteListViewState<T>();
 
+  /// Returns a widget representing a single item in the list.
   Widget getItemWidget(T item);
 
+  /// Retrieves a list of items for the specified page number.
   Future<List<T>> getListData(int? pageNumber);
 
+  /// Returns the widget to display while the initial data is being loaded.
   Widget getLoadingWidget() => Center(child: CircularProgressIndicator());
 
+  /// Returns the widget to display while additional data is being loaded for pagination.
   Widget getPaginationLoadingWidget() {
     return Center(
       child: Padding(
@@ -21,6 +27,7 @@ abstract class InfiniteListView<T> extends StatefulWidget {
     );
   }
 
+  /// Returns the widget to display in case of an error while loading initial data.
   Widget getErrorWidget(dynamic error) {
     return Center(
       child: Padding(
@@ -33,6 +40,7 @@ abstract class InfiniteListView<T> extends StatefulWidget {
     );
   }
 
+  /// Returns the widget to display in case of an error while loading additional data for pagination.
   Widget getPaginationErrorWidget(dynamic error) {
     return Center(
       child: Padding(
